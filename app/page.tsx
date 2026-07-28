@@ -66,7 +66,7 @@ function CalendarLink() {
   const ics = [
     "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Sree and Sajith//Wedding//EN", "CALSCALE:GREGORIAN",
     "BEGIN:VEVENT", "UID:main-reception-20261214@sree-sajith-wedding.vercel.app",
-    "DTSTAMP:20260728T000000Z", "DTSTART;TZID=Asia/Kolkata:20261214T110000", "DTEND;TZID=Asia/Kolkata:20261214T150000",
+    "DTSTAMP:20260728T000000Z", "DTSTART;TZID=Asia/Kolkata:20261214T110000",
     "SUMMARY:Sree & Sajith — Main Reception", `LOCATION:${mainReception.venue}\\, ${mainReception.address}`,
     "DESCRIPTION:Celebrate Sree and Sajith's wedding reception.", "END:VEVENT", "END:VCALENDAR",
   ].join("\r\n");

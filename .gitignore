@@ -4,5 +4,6 @@ out
 dist
 *.tsbuildinfo
 .env*
+!.env.example
 .env*
 !.env.example

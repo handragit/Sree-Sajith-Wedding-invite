@@ -104,7 +104,7 @@ export const wedding = {
     dressCode: null, // TODO: Confirm whether a dress code will be specified.
     accommodationTravel: null, // TODO: Confirm whether accommodation or travel information will be added.
     digitalGuestbook: null, // TODO: Confirm whether the couple wants a digital guestbook.
-    rsvpStorage: "Upstash Redis via Vercel API route", // TODO: Confirm the final RSVP storage choice before invitations are sent.
+    rsvpStorage: "Neon PostgreSQL via the server-side Vercel API route", // TODO: Confirm the final RSVP storage choice before invitations are sent.
   },
   social: {
     title: "Sree & Sajith — Wedding Invitation",

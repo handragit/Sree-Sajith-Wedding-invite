@@ -138,14 +138,17 @@ export default function Page() {
     <main id="main">
       <header id="home" className="hero">
         <div className="hero-pattern" aria-hidden="true" />
+        <div className="hero-folio" aria-hidden="true"><span>Issue No. 01</span><span>Kerala · MMXXVI</span></div>
         <div className="hero-language"><span lang="ml">{wedding.phrases.malayalam}</span><i /><span lang="ta">{wedding.phrases.tamil}</span></div>
         <Lamp />
         <div className="hero-copy">
+          <p className="publication">The Wedding Journal</p>
           <p className="overline">{wedding.phrases.english}</p>
           <h1><span>Sree</span><em>&</em><span>Sajith</span></h1>
           <p className="hero-line">We are getting married</p>
           <p className="hero-date">14 December 2026 <i /> Thrissur, Kerala</p>
         </div>
+        <p className="hero-note">A celebration of<br />love, distance &amp; home</p>
         <a href="#countdown" className="scroll-cue">Scroll to begin <ChevronDown size={16} /></a>
       </header>
 

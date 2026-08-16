@@ -44,7 +44,7 @@ export const wedding = {
       address: manaAddress,
       mapUrl: mapsSearch(`K. R. Thekkedath Mana, ${manaAddress}`),
       publicInvitation: true,
-      note: "An evening celebration with family and friends.",
+      note: "An evening to kick off the celebrations — good food, good company, and the warm chaos of family and friends coming together before the big day.",
     },
     {
       id: "temple",
@@ -56,7 +56,7 @@ export const wedding = {
       address: "Thrissur, Kerala",
       mapUrl: mapsSearch("Guruvayoor Temple, Thrissur, Kerala"),
       publicInvitation: false,
-      note: "Our wedding ceremony will take place at Guruvayoor Temple in the quiet hours of the morning, surrounded by our closest family.",
+      note: "Our muhurtham will take place at the Guruvayoor Temple, in the quiet hours before dawn — a sacred, intimate moment shared with our closest family as we begin our journey together.",
     },
     {
       id: "reception",
@@ -68,7 +68,7 @@ export const wedding = {
       address: manaAddress,
       mapUrl: mapsSearch(`K. R. Thekkedath Mana, ${manaAddress}`),
       publicInvitation: true,
-      note: "Join us as the wedding ceremonies and celebrations continue with family and friends.",
+      note: "As the morning unfolds, the celebrations move to K. R. Thekkedath Mana for the wedding rituals, the tying of the thali, and a joyous gathering with all our family and friends — concluding with a traditional sadhya.",
     },
   ] satisfies WeddingEvent[],
   social: {

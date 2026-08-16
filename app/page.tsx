@@ -1,4 +1,4 @@
-import { Mail, MapPin, MessageCircle } from "lucide-react";
+import { MajesticonChatText, MajesticonMail, MajesticonMapMarker } from "./components/Majesticons";
 import { wedding, type WeddingEvent } from "../src/data/wedding";
 import RSVPForm from "./components/RSVPForm";
 import VenueCard from "./components/VenueCard";
@@ -16,7 +16,7 @@ function EventCard({ event, index }: { event: WeddingEvent; index: number }) {
     <p className="event-date">{event.displayDate}</p>
     <h3>{event.title}</h3>
     {event.time && <p className="event-time">{event.time}</p>}
-    <div className="event-place"><MapPin size={18} aria-hidden="true" /><p><strong>{event.venue}</strong><br />{event.address}</p></div>
+    <div className="event-place"><MajesticonMapMarker size={18} /><p><strong>{event.venue}</strong><br />{event.address}</p></div>
     <p className="event-note">{event.note}</p>
     <a className="text-link" href={event.mapUrl} target="_blank" rel="noreferrer">View on Google Maps <span aria-hidden="true">↗</span></a>
   </article>;
@@ -31,7 +31,7 @@ export default function Page() {
       <section className="parents section"><p className="eyebrow">WITH THE BLESSINGS OF OUR PARENTS</p><h2>{wedding.parents[0]}</h2><span className="and">and</span><h2>{wedding.parents[1]}</h2><p>together with the blessings of our grandparents and elders,<br /><br />we invite you to join us in celebrating our wedding.</p></section>
       <section id="events" className="events-section section"><div className="section-title"><p className="eyebrow">The celebration</p><h2>Wedding Events</h2></div><div className="event-list">{wedding.events.map((event, index) => <EventCard event={event} index={index} key={event.id} />)}</div></section>
       <section id="venues" className="venues-section section"><div className="section-title centered"><p className="eyebrow">Where to find us</p><h2>Venues</h2><p>Directions and practical details for our two wedding venues.</p></div><div className="venue-list"><VenueCard event={temple} /><VenueCard event={mana} /></div></section>
-      <section id="rsvp" className="rsvp-section section"><div className="rsvp-intro"><p className="eyebrow">Kindly respond</p><h2>RSVP</h2><p>Please reply by <strong>{wedding.rsvp.deadline}</strong>.</p><p>The quiet temple ceremony is reserved for our closest family. We look forward to celebrating with you at the receptions.</p><div className="contacts"><h3>WhatsApp</h3>{wedding.contacts.map((contact) => <a key={`wa-${contact.name}`} href={`https://wa.me/${contact.phoneE164}?text=${encodeURIComponent("Hello, I’m writing about the wedding celebrations.")}`} target="_blank" rel="noreferrer"><MessageCircle size={18} /><span><strong>{contact.name}</strong><small>{contact.phoneDisplay}</small></span></a>)}<h3>Email</h3>{wedding.contacts.map((contact) => <a key={`mail-${contact.name}`} href={`mailto:${contact.email}?subject=${encodeURIComponent("Wedding RSVP — Sajith & Sreelakshmi")}`}><Mail size={18} /><span><strong>{contact.name}</strong><small>{contact.email}</small></span></a>)}</div></div><RSVPForm /></section>
+      <section id="rsvp" className="rsvp-section section"><div className="rsvp-intro"><p className="eyebrow">Kindly respond</p><h2>RSVP</h2><p>Please reply by <strong>{wedding.rsvp.deadline}</strong>.</p><p>The quiet temple ceremony is reserved for our closest family. We look forward to celebrating with you at the receptions.</p><div className="contacts"><h3>WhatsApp</h3>{wedding.contacts.map((contact) => <a key={`wa-${contact.name}`} href={`https://wa.me/${contact.phoneE164}?text=${encodeURIComponent("Hello, I’m writing about the wedding celebrations.")}`} target="_blank" rel="noreferrer"><MajesticonChatText size={18} /><span><strong>{contact.name}</strong><small>{contact.phoneDisplay}</small></span></a>)}<h3>Email</h3>{wedding.contacts.map((contact) => <a key={`mail-${contact.name}`} href={`mailto:${contact.email}?subject=${encodeURIComponent("Wedding RSVP — Sajith & Sreelakshmi")}`}><MajesticonMail size={18} /><span><strong>{contact.name}</strong><small>{contact.email}</small></span></a>)}</div></div><RSVPForm /></section>
       <section className="closing"><div className="closing-mark">{wedding.couple.monogram}</div><p>13–14 December 2026<br />Thrissur, Kerala</p></section>
       <section className="welcome section"><div className="kolam-rule" aria-hidden="true" /><h2>We would be delighted<br />to celebrate with you.</h2><div className="languages"><p lang="ml">{wedding.phrases.malayalam}</p><p lang="ta">{wedding.phrases.tamil}</p></div></section>
     </main>

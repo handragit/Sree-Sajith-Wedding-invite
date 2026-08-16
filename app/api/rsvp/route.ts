@@ -10,7 +10,7 @@ type RSVPBody = {
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RATE_WINDOW_MS = 60_000;
 const DUPLICATE_WINDOW_MS = 10 * 60_000;
-const attendanceValues = new Map([["Attending", "attending"], ["Unable to attend", "unable_to_attend"]]);
+const attendanceValues = new Map([["Attending", "attending"], ["Unable to attend", "unable_to_attend"], ["Not sure", "not_sure"]]);
 const eventValues = new Map<string, string[]>([
   ["Evening reception — 13 December", ["evening_reception"]],
   ["Main reception — 14 December", ["main_reception"]],
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
   const guestCount = Number(body.attendees);
   const dietaryRequirements = clean(body.dietary, 500);
   const message = clean(body.message, 1000);
-  if (!guestName || !email || !EMAIL_PATTERN.test(email) || !attendanceStatus || !events ||
+  if (!guestName || (email && !EMAIL_PATTERN.test(email)) || !attendanceStatus || !events ||
       !Number.isInteger(guestCount) || guestCount < 1 || guestCount > 12 ||
       (attendanceStatus === "unable_to_attend" && events.length !== 0) ||
       (attendanceStatus === "attending" && events.length === 0)) {
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
     const sql = neon(databaseUrl);
     await sql`INSERT INTO rsvps
       (guest_name, attendance_status, events, guest_count, email, dietary_requirements, message, submission_hash)
-      VALUES (${guestName}, ${attendanceStatus}, ${events}, ${guestCount}, ${email},
+      VALUES (${guestName}, ${attendanceStatus}, ${events}, ${guestCount}, ${email || null},
       ${dietaryRequirements || null}, ${message || null}, ${submissionHash})`;
     return NextResponse.json({ persisted: true });
   } catch (error) {

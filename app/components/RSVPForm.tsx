@@ -26,8 +26,7 @@ export default function RSVPForm() {
     const email = String(data.email ?? "").trim();
     const attendees = Number(data.attendees);
     if (!name) nextErrors.name = "Enter the guest name.";
-    if (!email) nextErrors.email = "Enter an email address.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = "Enter a valid email address, such as name@example.com.";
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = "Enter a valid email address, such as name@example.com.";
     if (!data.attendance) nextErrors.attendance = "Select whether you will attend.";
     if (!Number.isInteger(attendees) || attendees < 1 || attendees > 12) nextErrors.attendees = "Enter a whole number from 1 to 12.";
     if (!data.celebration) nextErrors.celebration = "Select the celebration you are responding to.";
@@ -63,8 +62,8 @@ export default function RSVPForm() {
 
   return <form className="rsvp-form" onSubmit={submit} onInput={clearFieldError} noValidate>
     <div className="field field--full"><label htmlFor="name">Guest name</label><input id="name" name="name" required maxLength={120} autoComplete="name" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? errorIds.name : undefined} /><FieldError field="name" errors={errors} /></div>
-    <div className="field field--full"><label htmlFor="email">Email address</label><input id="email" name="email" type="email" required maxLength={254} autoComplete="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? errorIds.email : undefined} /><FieldError field="email" errors={errors} /></div>
-    <div className="field"><label htmlFor="attendance">Attendance status</label><select id="attendance" name="attendance" required defaultValue="" aria-invalid={Boolean(errors.attendance)} aria-describedby={errors.attendance ? errorIds.attendance : undefined}><option value="" disabled>Select one</option><option>Attending</option><option>Unable to attend</option></select><FieldError field="attendance" errors={errors} /></div>
+    <div className="field field--full"><label htmlFor="email">Email address <span>optional</span></label><input id="email" name="email" type="email" maxLength={254} autoComplete="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? errorIds.email : undefined} /><FieldError field="email" errors={errors} /></div>
+    <div className="field"><label htmlFor="attendance">Attendance status</label><select id="attendance" name="attendance" required defaultValue="" aria-invalid={Boolean(errors.attendance)} aria-describedby={errors.attendance ? errorIds.attendance : undefined}><option value="" disabled>Select one</option><option>Attending</option><option>Unable to attend</option><option>Not sure</option></select><FieldError field="attendance" errors={errors} /></div>
     <div className="field"><label htmlFor="attendees">Number attending</label><input id="attendees" name="attendees" type="number" min="1" max="12" defaultValue="1" required aria-invalid={Boolean(errors.attendees)} aria-describedby={errors.attendees ? errorIds.attendees : undefined} /><FieldError field="attendees" errors={errors} /></div>
     <div className="field field--full"><label htmlFor="celebration">Which celebration?</label><select id="celebration" name="celebration" required defaultValue="" aria-invalid={Boolean(errors.celebration)} aria-describedby={errors.celebration ? errorIds.celebration : undefined}><option value="" disabled>Select one</option><option value="Evening reception — 13 December">Evening reception — 13 December</option><option value="Main reception — 14 December">Wedding celebration — 14 December</option><option>Both receptions</option><option>Unable to attend</option></select><FieldError field="celebration" errors={errors} /></div>
     <div className="field field--full"><label htmlFor="dietary">Dietary requirements <span>optional</span></label><input id="dietary" name="dietary" maxLength={300} /></div>

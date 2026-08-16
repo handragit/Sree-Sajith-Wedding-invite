@@ -24,7 +24,7 @@ export const wedding = {
   location: "Thrissur, Kerala",
   canonicalUrl: "https://sree-sajith-wedding.vercel.app",
   parents: ["Subramanian & Padma", "Chandran & Sunitha"],
-  rsvp: { deadline: "20 October 2026" },
+  rsvp: { deadline: "14 November 2026" },
   contacts: [
     { name: "Sreelakshmi", phoneDisplay: "+44 7824 069153", phoneE164: "447824069153", email: "subramaniansreelakshmi0@gmail.com" },
     { name: "Sajith", phoneDisplay: "+91 94958 92900", phoneE164: "919495892900", email: "sajithchan369@gmail.com" },

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Noto_Sans, Noto_Sans_Malayalam, Noto_Sans_Tamil } from "next/font/google";
 import "./globals.css";
 import { wedding } from "../src/data/wedding";
+import PublicAnalytics from "./components/PublicAnalytics";
 
 const serif = Cormorant_Garamond({ subsets: ["latin"], variable: "--font-serif", weight: ["400", "500", "600"], display: "swap" });
 const sans = Noto_Sans({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -24,5 +25,5 @@ const eventJsonLd = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={`${serif.variable} ${sans.variable} ${malayalam.variable} ${tamil.variable}`}><body>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd).replace(/</g, "\\u003c") }} /></body></html>;
+  return <html lang="en" className={`${serif.variable} ${sans.variable} ${malayalam.variable} ${tamil.variable}`}><body>{children}<PublicAnalytics /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd).replace(/</g, "\\u003c") }} /></body></html>;
 }

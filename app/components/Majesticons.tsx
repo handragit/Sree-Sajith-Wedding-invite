@@ -27,3 +27,7 @@ export function MajesticonChatText(props: IconProps) {
 export function MajesticonMail(props: IconProps) {
   return <Icon {...props}><path {...strokeProps} d="m7 9 3.75 3a2 2 0 0 0 2.5 0L17 9m4 8V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z"/></Icon>;
 }
+
+export function MajesticonGift(props: IconProps) {
+  return <Icon {...props}><path {...strokeProps} d="M4 11v9h16v-9M2 7h20v4H2zM12 7v13M12 7H7.5a2.5 2.5 0 1 1 0-5C10 2 12 7 12 7zm0 0h4.5a2.5 2.5 0 1 0 0-5C14 2 12 7 12 7z"/></Icon>;
+}

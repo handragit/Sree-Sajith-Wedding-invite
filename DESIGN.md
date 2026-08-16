@@ -77,7 +77,7 @@ components:
 
 The interface should feel like a cherished ceremonial invitation translated into a calm digital experience: warm, gracious, traditional, and unmistakably personal. Its richness comes from measured shifts among ivory, sand, maroon, brass, and leaf green—not from visual excess.
 
-The composition remains centered and welcoming, with generous breathing room and a clear procession from invitation to events, venues, RSVP, and closing. Components are tactile and ceremonial, while the overall surface is softly layered and easy to use.
+The composition remains centered and welcoming, with generous breathing room and a clear procession from invitation to events, registry, RSVP, and closing. Components are tactile and ceremonial, while the overall surface is softly layered and easy to use.
 
 **Key Characteristics:**
 
@@ -85,6 +85,7 @@ The composition remains centered and welcoming, with generous breathing room and
 - Elegant serif display type paired with highly legible multilingual sans serif text.
 - Softly layered cards, fine borders, and selective shadows.
 - Tactile pill actions with accessible touch targets.
+- A leaf-green Registry interlude with pale-brass kolam and geometric ornament.
 - Traditional atmosphere without ornamental density.
 
 ## Colors
@@ -141,7 +142,7 @@ The palette draws exclusively from a traditional wedding family, balancing kumku
 
 The page uses a centered ceremonial procession with full-width section surfaces and content constrained to roughly 680–760px for primary reading and form areas. Large screens receive generous vertical padding; smaller screens compress without losing the sense of occasion.
 
-Cards use one- or two-column arrangements where the content benefits from comparison. At tablet widths they collapse to a single column. Touch targets remain at least 44px high, and narrow screens preserve readable names, stacked actions, and full-width form controls.
+Cards use one- or two-column arrangements where the content benefits from comparison. The Registry is a full-width ceremonial pause between Events and RSVP: its reading content stays centered while its Wishlist row spans the available inner width. At tablet widths grids collapse to a single column; on compact screens the Wishlist status stacks below its icon-and-title row. Touch targets remain at least 44px high, and narrow screens preserve readable names, stacked actions, and full-width form controls.
 
 ## Elevation & Depth
 
@@ -155,7 +156,7 @@ The system is softly layered. Tonal shifts and fine borders establish most hiera
 
 ## Shapes
 
-Cards use gently rounded 14px corners, contact items use restrained 10px corners, and action buttons use a full pill silhouette. Inputs remain square-edged to preserve a formal stationery character. Fine borders, circles, and simple geometric marks echo traditional invitation detailing without introducing dense ornament.
+Cards use gently rounded 14px corners, contact items use restrained 10px corners, and action buttons use a full pill silhouette. Inputs remain square-edged to preserve a formal stationery character. Fine borders, circles, outlined diamonds, a restrained scalloped edge, and selectively placed kolam artwork echo traditional invitation detailing without introducing dense ornament.
 
 ## Components
 
@@ -181,11 +182,15 @@ Cards use gently rounded 14px corners, contact items use restrained 10px corners
 
 ### Navigation
 
-The navigation is a light, lightly translucent cream bar with an editorial monogram and small uppercase links. Links retain 44px touch height at every size; the mobile treatment stays visible and direct rather than introducing dead or hidden menu behavior.
+The navigation is a light, lightly translucent cream bar with an editorial monogram and small uppercase links for Events, Registry, and RSVP. Links retain 44px touch height at every size; the mobile treatment stays visible and direct rather than introducing dead or hidden menu behavior.
 
 ### Event and Venue Cards
 
 Event cards use ivory surfaces against a deep maroon ceremonial section. Venue cards are centered, restrained, and bordered in muted temple gold. Both prioritize event truth and actionable details over decoration.
+
+### Registry
+
+The Registry is a full-width leaf-green ceremonial surface placed between Events and RSVP. A restrained temple-gold scallop marks its top edge; a user-provided kolam appears as pale brass above an oversized ivory serif heading. Presence-first copy remains centered and readable, followed by an outlined diamond divider. The Wishlist row is broad and border-led, pairing a pale-brass gift icon with a serif title and a non-interactive outlined “Coming soon” pill; the status stacks on compact screens.
 
 ## Do's and Don'ts
 
@@ -195,6 +200,7 @@ Event cards use ivory surfaces against a deep maroon ceremonial section. Venue c
 - **Do** use soft layering, fine borders, and at most one restrained elevated surface per section.
 - **Do** keep components tactile, ceremonial, and comfortably touchable.
 - **Do** preserve the centered, gracious invitation character across screen sizes.
+- **Do** use traditional motifs as isolated ceremonial anchors, as in the Registry kolam, scallop, and diamond divider.
 
 ### Don't:
 
@@ -203,3 +209,4 @@ Event cards use ivory surfaces against a deep maroon ceremonial section. Venue c
 - **Don't** add dense ornamental decoration, visual clutter, or gratuitous traditional motifs.
 - **Don't** place low-contrast gold text on cream or ivory.
 - **Don't** recolor every paragraph; color should establish rhythm and hierarchy.
+- **Don't** style “Coming soon” or other unavailable Registry states as interactive controls.

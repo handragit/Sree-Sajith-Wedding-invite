@@ -4,7 +4,7 @@ import { DatabaseConfigurationError } from "../../../../src/server/db";
 import { getWishlistItems } from "../../../../src/server/wishlist";
 import { signOut } from "../../actions";
 import styles from "../../admin.module.css";
-import { toggleWishlistAction } from "./actions";
+import { releaseWishlistReservationAction, toggleWishlistAction } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +16,14 @@ const errorMessages: Record<string, string> = {
   "invalid-item": "That wishlist item could not be found.",
   "save-failed": "The visibility change could not be saved.",
   "delete-failed": "The wishlist item could not be deleted.",
+  "release-failed": "The reservation could not be released.",
 };
+
+const adminDateFormatter = new Intl.DateTimeFormat("en-IN", {
+  dateStyle: "medium",
+  timeStyle: "short",
+  timeZone: "Asia/Kolkata",
+});
 
 export default async function WishlistManagerPage({ searchParams }: WishlistManagerPageProps) {
   await requireAdminPage();
@@ -42,12 +49,19 @@ export default async function WishlistManagerPage({ searchParams }: WishlistMana
       {items.map((item) => <article className={styles.wishlistItem} key={item.id}>
         <div className={styles.wishlistItemMain}>
           <div><h2>{item.title}</h2><p>{item.category || "Uncategorised"}</p></div>
-          <span className={`${styles.visibilityBadge} ${item.isVisible ? styles.visibilityPublished : styles.visibilityHidden}`}>{item.isVisible ? "Published" : "Hidden"}</span>
+          <span className={`${styles.visibilityBadge} ${item.isReserved ? styles.visibilityReserved : item.isVisible ? styles.visibilityPublished : styles.visibilityHidden}`}>{item.isReserved ? "Reserved" : item.isVisible ? "Published" : "Hidden"}</span>
         </div>
-        <dl className={styles.itemMeta}><div><dt>Sort order</dt><dd>{item.sortOrder}</dd></div></dl>
+        <dl className={styles.itemMeta}>
+          <div><dt>Sort order</dt><dd>{item.sortOrder}</dd></div>
+          {item.isReserved && <>
+            <div><dt>Reserved by</dt><dd>{item.reservedBy || "—"}</dd></div>
+            <div><dt>Reserved at</dt><dd>{item.reservedAt ? adminDateFormatter.format(new Date(item.reservedAt)) : "—"}</dd></div>
+          </>}
+        </dl>
         <div className={styles.itemActions}>
           <Link href={`/admin/wishlist/${item.id}/edit`}>Edit</Link>
           <form action={toggleWishlistAction}><input name="id" type="hidden" value={item.id} /><button type="submit">{item.isVisible ? "Hide" : "Show"}</button></form>
+          {item.isReserved && <form action={releaseWishlistReservationAction}><input name="id" type="hidden" value={item.id} /><button type="submit">Make available again</button></form>}
           <Link className={styles.deleteAction} href={`/admin/wishlist/${item.id}/delete`}>Delete</Link>
         </div>
       </article>)}

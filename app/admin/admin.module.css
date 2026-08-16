@@ -643,8 +643,11 @@
 
 .visibilityPublished { background: var(--green-wash); color: var(--green); }
 .visibilityHidden { border: 1px solid var(--line); background: var(--cream); color: var(--muted); }
+.visibilityReserved { background: var(--sand); color: var(--maroon); }
 
 .itemMeta {
+  display: grid;
+  gap: 8px;
   margin: 0;
 }
 

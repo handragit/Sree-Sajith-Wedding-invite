@@ -14,6 +14,9 @@ export type WishlistItem = {
   imageUrl: string | null;
   category: string | null;
   isVisible: boolean;
+  isReserved: boolean;
+  reservedBy: string | null;
+  reservedAt: string | null;
   sortOrder: number;
   createdAt: string;
   updatedAt: string;
@@ -50,6 +53,9 @@ type WishlistRow = {
   image_url: string | null;
   category: string | null;
   is_visible: boolean;
+  is_reserved: boolean;
+  reserved_by: string | null;
+  reserved_at: string | null;
   sort_order: number;
   created_at: string;
   updated_at: string;
@@ -64,6 +70,9 @@ function mapWishlistItem(row: WishlistRow): WishlistItem {
     imageUrl: row.image_url,
     category: row.category,
     isVisible: row.is_visible,
+    isReserved: row.is_reserved,
+    reservedBy: row.reserved_by,
+    reservedAt: row.reserved_at,
     sortOrder: row.sort_order,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -132,7 +141,8 @@ export function isWishlistId(value: string) {
 export async function getWishlistItems() {
   const sql = getDatabase();
   const rows = await sql`
-    SELECT id, title, description, url, image_url, category, is_visible, sort_order, created_at, updated_at
+    SELECT id, title, description, url, image_url, category, is_visible, is_reserved,
+      reserved_by, reserved_at, sort_order, created_at, updated_at
     FROM wishlist_items
     ORDER BY sort_order ASC, created_at ASC, id ASC
   `;
@@ -144,7 +154,7 @@ export async function getPublicWishlistItems(): Promise<PublicWishlistItem[]> {
   const rows = await sql`
     SELECT id, title, description, url, image_url, category, sort_order
     FROM wishlist_items
-    WHERE is_visible = true
+    WHERE is_visible = true AND is_reserved = false
     ORDER BY sort_order ASC, created_at ASC, id ASC
   `;
 
@@ -163,7 +173,8 @@ export async function getWishlistItem(id: string) {
   if (!isWishlistId(id)) return null;
   const sql = getDatabase();
   const rows = await sql`
-    SELECT id, title, description, url, image_url, category, is_visible, sort_order, created_at, updated_at
+    SELECT id, title, description, url, image_url, category, is_visible, is_reserved,
+      reserved_by, reserved_at, sort_order, created_at, updated_at
     FROM wishlist_items
     WHERE id = ${id}
     LIMIT 1
@@ -209,5 +220,31 @@ export async function deleteWishlistItem(id: string) {
   if (!isWishlistId(id)) return false;
   const sql = getDatabase();
   const rows = await sql`DELETE FROM wishlist_items WHERE id = ${id} RETURNING id`;
+  return rows.length === 1;
+}
+
+export async function reservePublicWishlistItem(id: string, guestName: string) {
+  if (!isWishlistId(id)) return false;
+  const normalizedName = guestName.trim();
+  if (!normalizedName || normalizedName.length > 160) return false;
+  const sql = getDatabase();
+  const rows = await sql`
+    UPDATE wishlist_items
+    SET is_reserved = true, reserved_by = ${normalizedName}, reserved_at = now(), updated_at = now()
+    WHERE id = ${id} AND is_visible = true AND is_reserved = false
+    RETURNING id
+  `;
+  return rows.length === 1;
+}
+
+export async function releaseWishlistReservation(id: string) {
+  if (!isWishlistId(id)) return false;
+  const sql = getDatabase();
+  const rows = await sql`
+    UPDATE wishlist_items
+    SET is_reserved = false, reserved_by = null, reserved_at = null, updated_at = now()
+    WHERE id = ${id} AND is_reserved = true
+    RETURNING id
+  `;
   return rows.length === 1;
 }

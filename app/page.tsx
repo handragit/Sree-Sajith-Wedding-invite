@@ -1,6 +1,7 @@
 import { MajesticonChatText, MajesticonGift, MajesticonMail, MajesticonMapMarker } from "./components/Majesticons";
 import { wedding, type WeddingEvent } from "../src/data/wedding";
 import { getPublicWishlistItems, type PublicWishlistItem } from "../src/server/wishlist";
+import GiftReservationCard from "./components/GiftReservationCard";
 import RSVPForm from "./components/RSVPForm";
 
 export const revalidate = 60;
@@ -25,19 +26,7 @@ function RegistryWishlist({ items }: { items: PublicWishlistItem[] }) {
   return <div className="registry-wishlist">
     <div className="registry-wishlist-heading"><MajesticonGift size={34} /><h3>Wishlist</h3></div>
     {!items.length ? <p className="registry-empty">Wishlist coming soon.</p> : <div className="registry-list">
-      {items.map((item) => <article className="registry-wishlist-card" key={item.id}>
-        {item.imageUrl && <div className="registry-image-wrap">
-          {/* Native images keep validated remote hosts narrowly scoped without broad Next image permissions. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={item.imageUrl} alt={item.title} loading="lazy" decoding="async" referrerPolicy="no-referrer" />
-        </div>}
-        <div className="registry-card-content">
-          {item.category && <p className="registry-category">{item.category}</p>}
-          <h3>{item.title}</h3>
-          {item.description && <p>{item.description}</p>}
-          {item.url && <a href={item.url} target="_blank" rel="noopener noreferrer">View item <span aria-hidden="true">↗</span></a>}
-        </div>
-      </article>)}
+      {items.map((item) => <GiftReservationCard item={item} key={item.id} />)}
     </div>}
   </div>;
 }

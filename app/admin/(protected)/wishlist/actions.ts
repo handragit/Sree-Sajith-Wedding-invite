@@ -7,6 +7,7 @@ import {
   createWishlistItem,
   deleteWishlistItem,
   parseWishlistInput,
+  releaseWishlistReservation,
   toggleWishlistItemVisibility,
   updateWishlistItem,
   type WishlistFieldErrors,
@@ -29,6 +30,7 @@ export async function createWishlistAction(_state: WishlistFormState, formData: 
   }
 
   revalidatePath("/admin/wishlist");
+  revalidatePath("/");
   redirect("/admin/wishlist");
 }
 
@@ -44,6 +46,7 @@ export async function updateWishlistAction(id: string, _state: WishlistFormState
   }
 
   revalidatePath("/admin/wishlist");
+  revalidatePath("/");
   redirect("/admin/wishlist");
 }
 
@@ -61,6 +64,7 @@ export async function toggleWishlistAction(formData: FormData) {
   if (!updated) redirect("/admin/wishlist?error=invalid-item");
 
   revalidatePath("/admin/wishlist");
+  revalidatePath("/");
   redirect("/admin/wishlist");
 }
 
@@ -78,5 +82,24 @@ export async function deleteWishlistAction(formData: FormData) {
   if (!deleted) redirect("/admin/wishlist?error=invalid-item");
 
   revalidatePath("/admin/wishlist");
+  revalidatePath("/");
+  redirect("/admin/wishlist");
+}
+
+export async function releaseWishlistReservationAction(formData: FormData) {
+  await requireAdminPage();
+  const id = formData.get("id");
+  if (typeof id !== "string") redirect("/admin/wishlist?error=invalid-item");
+
+  let released;
+  try {
+    released = await releaseWishlistReservation(id);
+  } catch {
+    redirect("/admin/wishlist?error=release-failed");
+  }
+  if (!released) redirect("/admin/wishlist?error=invalid-item");
+
+  revalidatePath("/admin/wishlist");
+  revalidatePath("/");
   redirect("/admin/wishlist");
 }
